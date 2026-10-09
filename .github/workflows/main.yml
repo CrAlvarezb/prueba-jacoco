@@ -31,6 +31,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-m2
 
+      # Paso: dar permisos de ejecución al wrapper
+      - name: Make mvnw executable
+        run: chmod +x mvnw
+
       # Paso 4: Compilar y ejecutar pruebas (genera cobertura)
       - name: Build and test
         run: ./mvnw clean verify
@@ -56,6 +60,9 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+
+      - name: Make mvnw executable
+        run: chmod +x mvnw
 
       - name: Package application
         run: ./mvnw clean package -DskipTests
